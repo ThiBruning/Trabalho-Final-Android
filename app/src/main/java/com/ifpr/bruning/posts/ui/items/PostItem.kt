@@ -17,8 +17,5 @@ class PostItem(val post: Post): Item<ViewHolder>() {
         viewHolder.itemView.txt_author.text = post.authorName
         val target = viewHolder.itemView.image_post
         Picasso.get().load(post.image).into(target)
-        viewHolder.itemView.bt_delete.setOnClickListener {
-//            listener.postRemove(post)
-        }
     }
 }

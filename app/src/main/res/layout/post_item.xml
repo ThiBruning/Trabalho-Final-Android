@@ -19,14 +19,6 @@
                 android:layout_marginStart="16dp" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginLeft="16dp" android:textSize="16sp"/>
         <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp" app:srcCompat="@android:drawable/ic_delete"
-                android:id="@+id/bt_delete"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="parent" android:layout_marginRight="10dp"
-                android:layout_marginEnd="10dp"/>
-        <ImageView
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 android:id="@+id/image_post"

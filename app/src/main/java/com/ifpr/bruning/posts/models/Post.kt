@@ -16,4 +16,5 @@ class Post(
 ) {
     var id: Long = 0
     var author:Author? = null
+    var comments: List<Comment>? = null
 }

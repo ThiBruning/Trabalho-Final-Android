@@ -3,8 +3,13 @@ package com.ifpr.bruning.posts.app
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import com.ifpr.bruning.posts.R
 import com.ifpr.bruning.posts.RetrofitInstance
+import com.ifpr.bruning.posts.app.author.LoginActivity
+import com.ifpr.bruning.posts.listener.PostListener
 import com.ifpr.bruning.posts.models.Author
 import com.ifpr.bruning.posts.models.Post
 import com.ifpr.bruning.posts.services.AuthorService
@@ -78,9 +83,36 @@ class PostsActivity : AppCompatActivity() {
 
     private fun loadRecyclerView(posts: List<Post>) {
         val adapter = GroupAdapter<ViewHolder>()
+        adapter.setOnItemClickListener { item, view ->
+            item as PostItem
+            Toast.makeText(this, item.post.title, Toast.LENGTH_LONG).show()
+            val intent = Intent(this, PostInfoActivity::class.java)
+            intent.putExtra("post", item.post.id.toString())
+            startActivity(intent)
+        }
         posts.forEach {
             adapter.add(PostItem(it))
         }
         recycler_posts.adapter = adapter
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.nav_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.my_posts -> {
+                Toast.makeText(this, "Listando meus posts", Toast.LENGTH_LONG).show()
+            }
+
+            R.id.sign_out -> {
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
