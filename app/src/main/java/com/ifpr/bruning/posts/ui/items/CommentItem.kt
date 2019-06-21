@@ -13,5 +13,6 @@ class CommentItem(val comment: Comment) : Item<ViewHolder>() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.txt_comment_body.text = comment.body
+        viewHolder.itemView.txt_comment_author.text = comment.authorName
     }
 }

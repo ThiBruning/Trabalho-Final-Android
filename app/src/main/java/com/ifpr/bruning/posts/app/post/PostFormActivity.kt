@@ -1,10 +1,9 @@
-package com.ifpr.bruning.posts.app
+package com.ifpr.bruning.posts.app.post
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import com.ifpr.bruning.posts.R
 import com.ifpr.bruning.posts.RetrofitInstance
 import com.ifpr.bruning.posts.models.Post

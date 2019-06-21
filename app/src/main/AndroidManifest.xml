@@ -13,17 +13,19 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
+        <activity android:name=".app.comment.CommentFormActivity">
+        </activity>
         <activity
                 android:name=".app.NewsActivity"
                 android:label="NewsActivity">
         </activity>
-        <activity android:name=".app.PostInfoActivity">
+        <activity android:name=".app.post.PostInfoActivity">
         </activity>
-        <activity android:name=".app.PostFormActivity">
+        <activity android:name=".app.post.PostFormActivity">
         </activity>
         <activity android:name=".app.author.RegisterActivity">
         </activity>
-        <activity android:name=".app.PostsActivity">
+        <activity android:name=".app.post.PostsActivity">
         </activity>
         <activity android:name=".app.author.LoginActivity">
             <intent-filter>

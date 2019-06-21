@@ -1,4 +1,4 @@
-package com.ifpr.bruning.posts.app
+package com.ifpr.bruning.posts.app.post
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,6 @@ import android.widget.Toast
 import com.ifpr.bruning.posts.R
 import com.ifpr.bruning.posts.RetrofitInstance
 import com.ifpr.bruning.posts.app.author.LoginActivity
-import com.ifpr.bruning.posts.listener.PostListener
 import com.ifpr.bruning.posts.models.Author
 import com.ifpr.bruning.posts.models.Post
 import com.ifpr.bruning.posts.services.AuthorService
@@ -62,7 +61,7 @@ class PostsActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Author>, t: Throwable) {}
 
             override fun onResponse(call: Call<Author>, response: Response<Author>) {
-                PostsActivity.currentUser = response.body()
+                currentUser = response.body()
                 getPosts()
             }
         })
@@ -85,7 +84,6 @@ class PostsActivity : AppCompatActivity() {
         val adapter = GroupAdapter<ViewHolder>()
         adapter.setOnItemClickListener { item, view ->
             item as PostItem
-            Toast.makeText(this, item.post.title, Toast.LENGTH_LONG).show()
             val intent = Intent(this, PostInfoActivity::class.java)
             intent.putExtra("post", item.post.id.toString())
             startActivity(intent)

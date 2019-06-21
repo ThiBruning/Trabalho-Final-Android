@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.ifpr.bruning.posts.R
 import com.ifpr.bruning.posts.RetrofitInstance
-import com.ifpr.bruning.posts.app.PostsActivity
+import com.ifpr.bruning.posts.app.post.PostsActivity
 import com.ifpr.bruning.posts.models.Author
 import com.ifpr.bruning.posts.services.AuthorService
 import kotlinx.android.synthetic.main.activity_login.*

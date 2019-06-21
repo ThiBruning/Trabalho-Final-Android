@@ -7,4 +7,6 @@ class Comment(
     var body: String,
     @SerializedName("post_id")
     var post_id: Long
-)
+) {
+    var authorName: String? = null
+}
