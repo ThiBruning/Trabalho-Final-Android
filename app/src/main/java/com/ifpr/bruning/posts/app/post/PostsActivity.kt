@@ -89,7 +89,7 @@ class PostsActivity : AppCompatActivity() {
             startActivity(intent)
         }
         posts.forEach {
-            adapter.add(PostItem(it))
+            adapter.add(PostItem(it, false))
         }
         recycler_posts.adapter = adapter
     }
@@ -102,7 +102,8 @@ class PostsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.my_posts -> {
-                Toast.makeText(this, "Listando meus posts", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, AuthorPostsActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.sign_out -> {

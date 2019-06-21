@@ -21,4 +21,8 @@ interface PostService {
     @Headers("Accept: application/json")
     @GET("post/{id}")
     fun show(@Path("id") id: Long) : Call<Post>
+
+    @Headers("Accept: application/json")
+    @GET("author/{id}/posts")
+    fun authorPosts(@Path("id") id: Long) : Call<List<Post>>
 }
