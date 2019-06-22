@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.ifpr.bruning.posts.R
 import com.ifpr.bruning.posts.RetrofitInstance
 import com.ifpr.bruning.posts.app.author.LoginActivity
+import com.ifpr.bruning.posts.listener.PostListener
 import com.ifpr.bruning.posts.models.Author
 import com.ifpr.bruning.posts.models.Post
 import com.ifpr.bruning.posts.services.AuthorService
@@ -89,11 +90,12 @@ class PostsActivity : AppCompatActivity() {
             startActivity(intent)
         }
         posts.forEach {
-            adapter.add(PostItem(it, false))
+            adapter.add(PostItem(it, false, null))
         }
         recycler_posts.adapter = adapter
     }
 
+    // create nav menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.nav_menu, menu)
         return super.onCreateOptionsMenu(menu)

@@ -2,10 +2,12 @@ package com.ifpr.bruning.posts.app.post
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.ifpr.bruning.posts.R
 import com.ifpr.bruning.posts.RetrofitInstance
+import com.ifpr.bruning.posts.listener.PostListener
 import com.ifpr.bruning.posts.models.Post
 import com.ifpr.bruning.posts.services.PostService
 import com.ifpr.bruning.posts.ui.items.PostItem
@@ -16,9 +18,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AuthorPostsActivity : AppCompatActivity() {
+class AuthorPostsActivity : AppCompatActivity(), PostListener {
 
     lateinit var service: PostService
+    val adapter = GroupAdapter<ViewHolder>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +31,7 @@ class AuthorPostsActivity : AppCompatActivity() {
         configureRetrofit()
         getPosts()
         bt_new.isVisible = false
+
     }
 
     private fun configureRetrofit() {
@@ -48,10 +52,24 @@ class AuthorPostsActivity : AppCompatActivity() {
     }
 
     private fun loadRecyclerView(posts: List<Post>) {
-        val adapter = GroupAdapter<ViewHolder>()
         posts.forEach {
-            adapter.add(PostItem(it, true))
+            adapter.add(PostItem(it, true, this))
         }
         recycler_posts.adapter = adapter
+    }
+
+    override fun removePost(post: Post, position: Int) {
+//        Log.d("DADOS", post.id.toString())
+        val callback = service.deletePost(post.id)
+        callback.enqueue(object : Callback<Post>{
+            override fun onFailure(call: Call<Post>, t: Throwable) {
+                Toast.makeText(this@AuthorPostsActivity, t.message, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<Post>, response: Response<Post>) {
+                Toast.makeText(this@AuthorPostsActivity, "Post removido com sucesso!!", Toast.LENGTH_LONG).show()
+                adapter.removeGroup(position)
+            }
+        })
     }
 }
