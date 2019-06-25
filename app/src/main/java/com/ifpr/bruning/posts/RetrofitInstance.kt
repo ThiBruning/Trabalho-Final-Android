@@ -10,7 +10,7 @@ class RetrofitInstance {
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.100.81:8000")
+            .baseUrl("http://172.17.0.1:8000")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }

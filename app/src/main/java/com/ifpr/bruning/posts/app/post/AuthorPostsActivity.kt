@@ -30,8 +30,12 @@ class AuthorPostsActivity : AppCompatActivity(), PostListener {
 
         configureRetrofit()
         getPosts()
-        bt_new.isVisible = false
 
+        swipePosts.setOnRefreshListener {
+            getPosts()
+        }
+
+        bt_new.isVisible = false
     }
 
     private fun configureRetrofit() {
@@ -39,6 +43,7 @@ class AuthorPostsActivity : AppCompatActivity(), PostListener {
     }
 
     private fun getPosts() {
+        swipePosts.isRefreshing = true
         val callback = service.authorPosts(PostsActivity.currentUser?.id!!)
         callback.enqueue(object : Callback<List<Post>>{
             override fun onFailure(call: Call<List<Post>>, t: Throwable) {
@@ -46,6 +51,7 @@ class AuthorPostsActivity : AppCompatActivity(), PostListener {
             }
 
             override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
+                swipePosts.isRefreshing = false
                 loadRecyclerView(response.body()!!)
             }
         })
@@ -59,7 +65,6 @@ class AuthorPostsActivity : AppCompatActivity(), PostListener {
     }
 
     override fun removePost(post: Post, position: Int) {
-//        Log.d("DADOS", post.id.toString())
         val callback = service.deletePost(post.id)
         callback.enqueue(object : Callback<Post>{
             override fun onFailure(call: Call<Post>, t: Throwable) {
