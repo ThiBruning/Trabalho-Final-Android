@@ -1,5 +1,6 @@
 package com.ifpr.bruning.posts.app.post
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -62,6 +63,12 @@ class AuthorPostsActivity : AppCompatActivity(), PostListener {
             adapter.add(PostItem(it, true, this))
         }
         recycler_posts.adapter = adapter
+    }
+
+    override fun editPost(post: Post) {
+        intent = Intent(this, PostFormActivity::class.java)
+        intent.putExtra("post", post.id.toString())
+        startActivity(intent)
     }
 
     override fun removePost(post: Post, position: Int) {

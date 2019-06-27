@@ -21,10 +21,13 @@ class PostItem(val post: Post, val of_author: Boolean, val listener: PostListene
         Picasso.get().load(post.image).into(target)
         if (of_author) {
             viewHolder.itemView.bt_post_delete.visibility = View.VISIBLE
+            viewHolder.itemView.bt_post_edit.visibility = View.VISIBLE
             viewHolder.itemView.bt_post_delete.setOnClickListener {
                 val position = viewHolder.position
-//                val position = it.get
                 listener?.removePost(post, position)
+            }
+            viewHolder.itemView.bt_post_edit.setOnClickListener {
+                listener?.editPost(post)
             }
         }
 

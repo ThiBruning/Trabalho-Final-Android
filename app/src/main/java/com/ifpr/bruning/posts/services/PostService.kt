@@ -19,6 +19,14 @@ interface PostService {
                @Field("body") body: String): Call<Post>
 
     @Headers("Accept: application/json")
+    @PUT("post/{id}")
+    @FormUrlEncoded
+    fun update(@Path("id") id: Long,
+               @Field("title") title: String,
+               @Field("image") image: String,
+               @Field("body") body: String): Call<Post>
+
+    @Headers("Accept: application/json")
     @GET("post/{id}")
     fun show(@Path("id") id: Long) : Call<Post>
 

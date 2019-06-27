@@ -4,4 +4,5 @@ import com.ifpr.bruning.posts.models.Post
 
 interface PostListener {
     fun removePost(post: Post, position: Int)
+    fun editPost(post: Post)
 }
